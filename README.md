@@ -74,6 +74,7 @@ $ docker run -d -e "KEEPALIVED_ROUTE_ID=51" --name keepalived colovu/keepalived:
 
 - KEEPALIVED_STATE：默认值：**BACKUP**。Keepalvied 角色，取值范围：`MASTER`、`BACKUP`
 - KEEPALIVED_INTERFACE：默认值：**eth0**。指定网络接口
+- KEEPALIVED_VIPS：默认值：**192.168.0.240**。设置 VIP 地址，多个地址以','或' '分隔
 - KEEPALIVED_PRIORITY：默认值：**50**。节点优先级,数字越大表示节点的优先级越高
 - KEEPALIVED_ADVERT_TIME：默认值：**1**。MASTER与BACKUP主机之间同步检查的时间间隔
 

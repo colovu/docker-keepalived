@@ -37,7 +37,7 @@ export KEEPALIVED_ROUTE_ID=${KEEPALIVED_ROUTE_ID:-51}
 export KEEPALIVED_PRIORITY=${KEEPALIVED_PRIORITY:-50}
 export KEEPALIVED_ADVERT_TIME=${KEEPALIVED_ADVERT_TIME:-1}
 export KEEPALIVED_AUTH_PASS=${KEEPALIVED_AUTH_PASS:-colovu}
-
+export KEEPALIVED_VIPS=${KEEPALIVED_VIPS:-192.168.0.240}
 
 # Application Cluster configuration
 
@@ -79,6 +79,13 @@ keepalived_generate_conf() {
     keepalived_conf_set "{{KEEPALIVED_PRIORITY}}" "${KEEPALIVED_PRIORITY}"
     keepalived_conf_set "{{KEEPALIVED_ADVERT_TIME}}" "${KEEPALIVED_ADVERT_TIME}"
     keepalived_conf_set "{{KEEPALIVED_AUTH_PASS}}" "${KEEPALIVED_AUTH_PASS}"
+    read -r -a keepalived_vip_list <<< "$(echo ${KEEPALIVED_VIPS//[;, ]/ } | sed -e 's/^\"//g' -e 's/\"$//g')"
+        for server in "${keepalived_vip_list[@]}"; do
+            LOG_I "Adding VIP: ${server}"
+            keepalived_conf_set "{{KEEPALIVED_VIPS}}" "${server}\n    {{KEEPALIVED_VIPS}}"
+#            (( i++ ))
+        done
+        remove_in_file "${APP_CONF_FILE}" "KEEPALIVED_VIPS" true
 }
 
 # 检测用户参数信息是否满足条件; 针对部分权限过于开放情况，打印提示信息
