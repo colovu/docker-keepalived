@@ -101,7 +101,7 @@ RUN \
 	\
 # 下载需要的软件包资源。可使用 不校验、签名校验、SHA256 校验 三种方式
 	DIST_NAME="${APP_NAME}-${APP_VERSION}.tar.gz"; \
-	DIST_SHA256="9670fbc5eb3dc113828be8b702549dc68ec9578cf83287520d935be76fc8f193"; \
+	DIST_SHA256="d94d7ccbc5c95ab39c95a0e5ae89a25a224f39b6811f2930d3a1885a69732259"; \
 	DIST_URLS=" \
 		${local_url}${APP_NAME}/ \
 		http://keepalived.org/software/ \
