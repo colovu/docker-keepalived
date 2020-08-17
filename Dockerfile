@@ -8,7 +8,7 @@ FROM colovu/debian:10
 ARG apt_source=default
 
 # 外部指定应用版本信息，如 "--build-arg app_ver=6.0.0"
-ARG app_ver=2.0.20
+ARG app_ver=2.1.5
 
 # 编译镜像时指定本地服务器地址，如 "--build-arg local_url=http://172.29.14.108/dist-files/"
 ARG local_url=""

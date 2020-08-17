@@ -8,7 +8,8 @@
 
 **版本信息**：
 
-- 2.0、2.0.20、latest
+- 2.1、latest
+- 2.0
 
 **镜像信息**
 
@@ -115,7 +116,8 @@ $ docker run -d -e "KEEPALIVED_ROUTE_ID=51" --name keepalived colovu/keepalived:
 
 ## 更新记录
 
-- 2.0.20、latest
+- 2.1.5、latest
+- 2.0.20
 
 
 
