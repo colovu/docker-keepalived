@@ -32,6 +32,15 @@ $ curl -sSL https://raw.githubusercontent.com/colovu/docker-keepalived/master/do
 $ docker-compose up -d
 ```
 
+Docker 使用其他容器网络（`www`容器），并指定 VIP:
+
+```shell
+$ docker run -d --name keepalived  --privileged=true -e KEEPALIVED_VIPS=172.17.0.100 --net container:www colovu/keepalived:latest
+```
+
+- 使用其他容器（如命令行）的网络："container:www"
+- 使用其他服务（如Docker-compose）的网络："service:www"
+
 
 
 ---
@@ -99,7 +108,8 @@ $ docker run -d -e "KEEPALIVED_ROUTE_ID=51" --name keepalived colovu/keepalived:
 ## 注意事项
 
 - 容器中启动参数必须包含`--privileged`，否则会报`Netlink: error: Operation not permitted`错误
-- 如果 VIP 使用宿主机网段，需要使用`host`方式配置网络，如：`--net host`
+- 如果未使用`--privileged`参数，也可以使用`cap_add`指定具体的权限，如：ALL、NET_ADMIN等
+- 如果 VIP 使用宿主机网段，需要使用`host`方式配置网络，如：`--net host`；使用宿主机网络时，不能声明端口映射
 
 
 

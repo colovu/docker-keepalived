@@ -6,8 +6,25 @@ services:
   keepalived:
     image: 'colovu/keepalived:latest'
     privileged: true
-    volumes:
-      - '/tmp/conf:/srv/conf'
+    networks: 
+      - back-tier
     environment:
-      - KEEPALIVED_VIPS=192.168.200.1,172.20.0.100
-      - ENV_DEBUG=yes
+      - KEEPALIVED_STATE=MASTER
+      - KEEPALIVED_PRIORITY=100
+      - KEEPALIVED_VIPS=172.50.0.100,172.50.0.102
+
+  keepalived2:
+    image: 'colovu/keepalived:latest'
+    privileged: true
+    networks: 
+      - back-tier
+    environment:
+      - KEEPALIVED_STATE=BACKUP
+      - KEEPALIVED_PRIORITY=80
+      - KEEPALIVED_VIPS=172.50.0.100,172.50.0.102
+
+networks:
+  back-tier:
+    ipam:
+      config:
+        - subnet: 172.50.0.0/16

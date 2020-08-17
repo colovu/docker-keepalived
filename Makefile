@@ -4,7 +4,7 @@
 
 app_name := colovu/keepalived
 
-# 生成镜像TAG，类似：<镜像名>:<分支名>-<Git ID>  或 <镜像名>:latest-<年月日>-<时分>
+# 生成镜像TAG，类似：<镜像名>:<分支名>-<Git ID>  或 <镜像名>:latest-<年月日>-<时分秒>
 current_subversion:=$(shell if [[ -d .git ]]; then git rev-parse --short HEAD; else date +%y%m%d-%H%M%S; fi)
 current_tag:=$(shell if [[ -d .git ]]; then git rev-parse --abbrev-ref HEAD | sed -e 's/master/latest/'; else echo "latest"; fi)-$(current_subversion)
 
