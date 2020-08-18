@@ -2,7 +2,7 @@
 
 针对 [Keepalived](https://keepalived.org) 应用的 Docker 镜像，用于提供 Keepalived 服务。
 
-使用说明可参照：[官方说明](https://keepalived.org/manpage.html)
+使用说明可参照：[官方说明](https://keepalived.org/manpage.html) 及 [配置参数说明](https://www.keepalived.org/doc/index.html)
 
 <img src="img/keepalived-logo.png" alt="keepalived-logo" style="zoom:50%;" />
 
