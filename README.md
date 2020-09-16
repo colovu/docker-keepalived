@@ -2,26 +2,26 @@
 
 针对 [Keepalived](https://keepalived.org) 应用的 Docker 镜像，用于提供 Keepalived 服务。
 
-使用说明可参照：[官方说明](https://keepalived.org/manpage.html)
+使用说明可参照：[官方说明](https://keepalived.org/manpage.html) 及 [配置参数说明](https://www.keepalived.org/doc/index.html)
 
 <img src="img/keepalived-logo.png" alt="keepalived-logo" style="zoom:50%;" />
 
-**版本信息**：
+**版本信息：**
 
-- 2.0、2.0.20、latest
+- 2.0、latest
 
 **镜像信息**
 
-* 镜像地址：colovu/keepalived:latest
+* 镜像地址：colovu/keepalived:2.0
 
 
 
-## **TL;DR**
+## TL;DR
 
 Docker 快速启动命令：
 
 ```shell
-$ docker run -d --name keepalived --privileged colovu/keepalived:latest
+$ docker run -d --privileged=true colovu/keepalived:2.0
 ```
 
 Docker-Compose 快速启动命令：
@@ -108,14 +108,14 @@ $ docker run -d -e "KEEPALIVED_ROUTE_ID=51" --name keepalived colovu/keepalived:
 ## 注意事项
 
 - 容器中启动参数必须包含`--privileged`，否则会报`Netlink: error: Operation not permitted`错误
-- 如果未使用`--privileged`参数，也可以使用`cap_add`指定具体的权限，如：ALL、NET_ADMIN等
+- 如果未使用`--privileged`参数，也可以使用`cap_add`指定具体的权限，如：ALL、NET_ADMIN、NET_RAW等
 - 如果 VIP 使用宿主机网段，需要使用`host`方式配置网络，如：`--net host`；使用宿主机网络时，不能声明端口映射
 
 
 
 ## 更新记录
 
-- 2.0.20、latest
+- 2.0、latest
 
 
 
