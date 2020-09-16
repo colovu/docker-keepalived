@@ -98,7 +98,7 @@ RUN install_pkg `cat ${APP_HOME_DIR}/runDeps`;
 RUN set -eux; \
 	override_file="/usr/local/overrides/overrides-${APP_VERSION}.sh"; \
 	[ -e "${override_file}" ] && /bin/bash "${override_file}"; \
-	gosu ${APP_NAME} ${APP_EXEC} --version ; \
+	gosu ${APP_USER} ${APP_EXEC} --version ; \
 	:;
 
 # 默认提供的数据卷
