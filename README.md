@@ -6,23 +6,23 @@
 
 <img src="img/keepalived-logo.png" alt="keepalived-logo" style="zoom:50%;" />
 
-**版本信息**：
+**版本信息：**
 
 - 2.1、latest
 - 2.0
 
 **镜像信息**
 
-* 镜像地址：colovu/keepalived:latest
+* 镜像地址：colovu/keepalived
 
 
 
-## **TL;DR**
+## TL;DR
 
 Docker 快速启动命令：
 
 ```shell
-$ docker run -d --name keepalived --privileged colovu/keepalived:latest
+$ docker run -d --privileged=true colovu/keepalived
 ```
 
 Docker-Compose 快速启动命令：
