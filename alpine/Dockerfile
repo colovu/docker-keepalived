@@ -83,7 +83,7 @@ COPY customer /
 
 # 以包管理方式安装软件包(Optional)
 RUN select_source ${apt_source}
-RUN install_pkg iptables ipset
+RUN install_pkg iptables ipset netcat
 
 RUN create_user && prepare_env
 
