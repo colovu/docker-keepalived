@@ -4,7 +4,7 @@ version: '3.8'
 # 更多配置参数请参考镜像 README.md 文档中说明
 services:
   keepalived:
-    image: 'colovu/keepalived'
+    image: 'colovu/keepalived:2.1'
     privileged: true
     networks: 
       - back-tier
@@ -13,8 +13,18 @@ services:
       - KEEPALIVED_PRIORITY=100
       - KEEPALIVED_VIPS=172.50.0.100,172.50.0.102
 
+  keepalived1:
+    image: 'colovu/keepalived:2.1'
+    privileged: true
+    networks:
+      - back-tier
+    environment:
+      - KEEPALIVED_STATE=MASTER
+      - KEEPALIVED_PRIORITY=90
+      - KEEPALIVED_VIPS=172.50.0.100,172.50.0.102
+
   keepalived2:
-    image: 'colovu/keepalived'
+    image: 'colovu/keepalived:2.1'
     cap_add: 
       - NET_ADMIN
       - NET_RAW

@@ -13,7 +13,7 @@
 
 **镜像信息**
 
-* 镜像地址：colovu/keepalived
+* 镜像地址：colovu/keepalived:2.1
 
 
 
@@ -22,7 +22,7 @@
 Docker 快速启动命令：
 
 ```shell
-$ docker run -d --privileged=true colovu/keepalived
+$ docker run -d --privileged=true colovu/keepalived:2.1
 ```
 
 Docker-Compose 快速启动命令：
@@ -116,8 +116,8 @@ $ docker run -d -e "KEEPALIVED_ROUTE_ID=51" --name keepalived colovu/keepalived:
 
 ## 更新记录
 
-- 2.1.5、latest
-- 2.0.20
+- 2.1、latest
+- 2.0
 
 
 
