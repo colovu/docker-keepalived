@@ -76,7 +76,12 @@ keepalived_generate_conf() {
     keepalived_conf_set "{{KEEPALIVED_PRIORITY}}" "${KEEPALIVED_PRIORITY}"
     keepalived_conf_set "{{KEEPALIVED_ADVERT_TIME}}" "${KEEPALIVED_ADVERT_TIME}"
     keepalived_conf_set "{{KEEPALIVED_AUTH_PASS}}" "${KEEPALIVED_AUTH_PASS}"
-    keepalived_conf_set "{{KEEPALIVED_PREEMPT}}" "${KEEPALIVED_PREEMPT}"
+    if [[ -n "${KEEPALIVED_PREEMPT}" ]]; then
+        keepalived_conf_set "{{KEEPALIVED_PREEMPT}}" "${KEEPALIVED_PREEMPT}"
+    else
+        remove_in_file "${APP_CONF_FILE}" "KEEPALIVED_PREEMPT" true
+    fi
+    
     read -r -a keepalived_vip_list <<< "$(echo ${KEEPALIVED_VIPS//[;, ]/ } | sed -e 's/^\"//g' -e 's/\"$//g')"
         for server in "${keepalived_vip_list[@]}"; do
             LOG_I "Adding VIP: ${server}"
