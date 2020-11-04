@@ -28,6 +28,7 @@ app_env() {
 
 		# Paths
 		export APP_CONF_FILE=${APP_CONF_DIR}/keepalived.conf
+        export APP_PID_FILE=${APP_RUN_DIR}/keepalived.pid
 
 		# Application settings
 		export KEEPALIVED_ID=${KEEPALIVED_ID:-${HOSTNAME}}
@@ -38,7 +39,7 @@ app_env() {
 		export KEEPALIVED_ADVERT_TIME=${KEEPALIVED_ADVERT_TIME:-1}
 		export KEEPALIVED_AUTH_PASS=${KEEPALIVED_AUTH_PASS:-colovu}
 		export KEEPALIVED_VIPS=${KEEPALIVED_VIPS:-192.168.0.240}
-        export KEEPALIVED_PREEMPT=${KEEPALIVED_PREEMPT:-}
+        export KEEPALIVED_PREEMPT=${KEEPALIVED_PREEMPT:-yes}
 
 		# Application Cluster configuration
 
@@ -76,10 +77,10 @@ keepalived_generate_conf() {
     keepalived_conf_set "{{KEEPALIVED_PRIORITY}}" "${KEEPALIVED_PRIORITY}"
     keepalived_conf_set "{{KEEPALIVED_ADVERT_TIME}}" "${KEEPALIVED_ADVERT_TIME}"
     keepalived_conf_set "{{KEEPALIVED_AUTH_PASS}}" "${KEEPALIVED_AUTH_PASS}"
-    if [[ -n "${KEEPALIVED_PREEMPT}" ]]; then
-        keepalived_conf_set "{{KEEPALIVED_PREEMPT}}" "${KEEPALIVED_PREEMPT}"
-    else
+    if is_boolean_yes "${KEEPALIVED_PREEMPT}" ; then
         remove_in_file "${APP_CONF_FILE}" "KEEPALIVED_PREEMPT" true
+    else
+        keepalived_conf_set "{{KEEPALIVED_PREEMPT}}" "nopreempt"
     fi
     
     read -r -a keepalived_vip_list <<< "$(echo ${KEEPALIVED_VIPS//[;, ]/ } | sed -e 's/^\"//g' -e 's/\"$//g')"
