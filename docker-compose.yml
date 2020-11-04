@@ -13,6 +13,16 @@ services:
       - KEEPALIVED_PRIORITY=100
       - KEEPALIVED_VIPS=172.50.0.100,172.50.0.102
 
+  keepalived1:
+    image: 'colovu/keepalived:2.0'
+    privileged: true
+    networks:
+      - back-tier
+    environment:
+      - KEEPALIVED_STATE=MASTER
+      - KEEPALIVED_PRIORITY=90
+      - KEEPALIVED_VIPS=172.50.0.100,172.50.0.102
+
   keepalived2:
     image: 'colovu/keepalived:2.0'
     cap_add: 
