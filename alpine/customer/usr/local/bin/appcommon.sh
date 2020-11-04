@@ -34,10 +34,11 @@ app_env() {
 		export KEEPALIVED_STATE=${KEEPALIVED_STATE:-BACKUP}
 		export KEEPALIVED_INTERFACE=${KEEPALIVED_INTERFACE:-eth0}
 		export KEEPALIVED_ROUTE_ID=${KEEPALIVED_ROUTE_ID:-51}
-		export KEEPALIVED_PRIORITY=${KEEPALIVED_PRIORITY:-50}
+		export KEEPALIVED_PRIORITY=${KEEPALIVED_PRIORITY:-80}
 		export KEEPALIVED_ADVERT_TIME=${KEEPALIVED_ADVERT_TIME:-1}
 		export KEEPALIVED_AUTH_PASS=${KEEPALIVED_AUTH_PASS:-colovu}
 		export KEEPALIVED_VIPS=${KEEPALIVED_VIPS:-192.168.0.240}
+        export KEEPALIVED_PREEMPT=${KEEPALIVED_PREEMPT:-}
 
 		# Application Cluster configuration
 
@@ -75,6 +76,7 @@ keepalived_generate_conf() {
     keepalived_conf_set "{{KEEPALIVED_PRIORITY}}" "${KEEPALIVED_PRIORITY}"
     keepalived_conf_set "{{KEEPALIVED_ADVERT_TIME}}" "${KEEPALIVED_ADVERT_TIME}"
     keepalived_conf_set "{{KEEPALIVED_AUTH_PASS}}" "${KEEPALIVED_AUTH_PASS}"
+    keepalived_conf_set "{{KEEPALIVED_PREEMPT}}" "${KEEPALIVED_PREEMPT}"
     read -r -a keepalived_vip_list <<< "$(echo ${KEEPALIVED_VIPS//[;, ]/ } | sed -e 's/^\"//g' -e 's/\"$//g')"
         for server in "${keepalived_vip_list[@]}"; do
             LOG_I "Adding VIP: ${server}"
