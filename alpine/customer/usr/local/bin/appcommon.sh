@@ -40,6 +40,7 @@ app_env() {
 		export KEEPALIVED_AUTH_PASS=${KEEPALIVED_AUTH_PASS:-colovu}
 		export KEEPALIVED_VIPS=${KEEPALIVED_VIPS:-192.168.0.240}
         export KEEPALIVED_PREEMPT=${KEEPALIVED_PREEMPT:-yes}
+        export KEEPALIVED_SCRIPT=${KEEPALIVED_SCRIPT:-chk_service.sh}
 
 		# Application Cluster configuration
 
@@ -77,6 +78,7 @@ keepalived_generate_conf() {
     keepalived_conf_set "{{KEEPALIVED_PRIORITY}}" "${KEEPALIVED_PRIORITY}"
     keepalived_conf_set "{{KEEPALIVED_ADVERT_TIME}}" "${KEEPALIVED_ADVERT_TIME}"
     keepalived_conf_set "{{KEEPALIVED_AUTH_PASS}}" "${KEEPALIVED_AUTH_PASS}"
+    keepalived_conf_set "{{KEEPALIVED_SCRIPT}}" "${KEEPALIVED_SCRIPT}"
     if is_boolean_yes "${KEEPALIVED_PREEMPT}" ; then
         remove_in_file "${APP_CONF_FILE}" "KEEPALIVED_PREEMPT" true
     else
