@@ -1,11 +1,12 @@
-# Ver: 1.2 by Endial Fang (endial@126.com)
+# Ver: 1.4 by Endial Fang (endial@126.com)
 #
 
 # 预处理 =========================================================================
-FROM colovu/dbuilder as builder
+ARG registry_url="registry.cn-shenzhen.aliyuncs.com"
+FROM ${registry_url}/colovu/dbuilder as builder
 
 # sources.list 可使用版本：default / tencent / ustc / aliyun / huawei
-ARG apt_source=default
+ARG apt_source=aliyun
 
 # 编译镜像时指定用于加速的本地服务器地址
 ARG local_url=""
@@ -13,9 +14,10 @@ ARG local_url=""
 ENV APP_NAME=keepalived \
 	APP_VERSION=2.1.5
 
-WORKDIR /usr/local
-
+# 选择软件包源(Optional)，以加速后续软件包安装
 RUN select_source ${apt_source};
+
+# 安装依赖的软件包及库(Optional)
 RUN install_pkg libipset-dev libnftnl-dev iptables-dev libnfnetlink-dev libssl-dev libnl-genl-3-dev
 
 # 下载并解压软件包
@@ -51,10 +53,14 @@ RUN set -eux; \
 		cut -d: -f1 | \
 		sort -u >/usr/local/${APP_NAME}/runDeps;
 
-# 镜像生成 ========================================================================
-FROM colovu/debian:10
 
-ARG apt_source=default
+# 镜像生成 ========================================================================
+FROM ${registry_url}/colovu/debian:10
+
+# sources.list 可使用版本：default / tencent / ustc / aliyun / huawei
+ARG apt_source=aliyun
+
+# 编译镜像时指定用于加速的本地服务器地址
 ARG local_url=""
 
 ENV APP_NAME=keepalived \

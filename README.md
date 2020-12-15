@@ -13,7 +13,7 @@
 
 **镜像信息**
 
-* 镜像地址：colovu/keepalived:2.1
+* 镜像地址：registry.cn-shenzhen.aliyuncs.com/colovu/keepalived:2.1
 
 
 
@@ -22,7 +22,7 @@
 Docker 快速启动命令：
 
 ```shell
-$ docker run -d --privileged=true colovu/keepalived:2.1
+$ docker run -d --privileged=true registry.cn-shenzhen.aliyuncs.com/colovu/keepalived:2.1
 ```
 
 Docker-Compose 快速启动命令：
@@ -36,7 +36,7 @@ $ docker-compose up -d
 Docker 使用其他容器网络（`www`容器），并指定 VIP:
 
 ```shell
-$ docker run -d --name keepalived  --privileged=true -e KEEPALIVED_VIPS=172.17.0.100 --net container:www colovu/keepalived:latest
+$ docker run -d --name keepalived  --privileged=true -e KEEPALIVED_VIPS=172.17.0.100 --net container:www registry.cn-shenzhen.aliyuncs.com/colovu/keepalived:2.1
 ```
 
 - 使用其他容器（如命令行）的网络："container:www"
