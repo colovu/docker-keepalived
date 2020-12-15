@@ -4,7 +4,7 @@ version: '3.8'
 # 更多配置参数请参考镜像 README.md 文档中说明
 services:
   keepalived:
-    image: 'colovu/keepalived:2.0'
+    image: 'registry.cn-shenzhen.aliyuncs.com/colovu/keepalived:2.0'
     privileged: true
     networks: 
       - back-tier
@@ -14,7 +14,7 @@ services:
       - KEEPALIVED_VIPS=172.50.0.100,172.50.0.102
 
   keepalived1:
-    image: 'colovu/keepalived:2.0'
+    image: 'registry.cn-shenzhen.aliyuncs.com/colovu/keepalived:2.0'
     privileged: true
     networks:
       - back-tier
@@ -24,7 +24,7 @@ services:
       - KEEPALIVED_VIPS=172.50.0.100,172.50.0.102
 
   keepalived2:
-    image: 'colovu/keepalived:2.0'
+    image: 'registry.cn-shenzhen.aliyuncs.com/colovu/keepalived:2.0'
     cap_add: 
       - NET_ADMIN
       - NET_RAW
